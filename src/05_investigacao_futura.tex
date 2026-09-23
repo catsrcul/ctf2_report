@@ -1,0 +1,53 @@
+% !TEX root = ../main.tex
+\section{Considerações para Futura Investigação}
+\label{sec:investigacao_futura}
+
+O trabalho desenvolvido ao longo deste estágio demonstrou que a convergência entre ótica avançada de alta velocidade, inteligência artificial profunda (ResNet-34 U-Net) e formulações de reconstrução tridimensional com rigor físico permite obter medições detalhadas e não intrusivas da hidrodinâmica de escoamentos ebulitivos. Com vista à consolidação e alargamento destes resultados no âmbito do projeto Bio-Waste2Carbon e de futuras dissertações de mestrado e doutoramento, identificam-se várias linhas estratégicas de investigação futura.
+
+\subsection{Acoplamento com a Transmissão de Calor e Correlações Macroscópicas}
+\label{subsec:acoplamento_termico}
+
+A prioridade científica imediata reside em correlacionar diretamente as grandezas interfaciais extraídas pela visão computacional com as variáveis térmicas do escoamento. Em escoamentos ebulitivos em tubos horizontais, o coeficiente de transferência de calor local ($h_{\text{tp}}$) é tradicionalmente modelado como uma sobreposição não linear entre a ebulição nucleada na parede ($h_{\text{nb}}$) e a convecção forçada bifásica ($h_{\text{cb}}$)~\cite{collier1994convective, kandlikar1990general}.
+
+Conforme evidenciado no recente artigo de revisão abrangente publicado pelo grupo de investigação (Branco, Pereira \& Ribeiro, 2026~\cite{branco2026flow}), as principais discrepâncias e incertezas nas mais de 30 correlações da literatura decorrem da incapacidade de prever com precisão o perímetro molhado da parede e a transição para regimes estratificados ou anulares, onde ocorre a secagem prematura (\emph{dryout}) da geratriz superior do tubo.
+\begin{itemize}
+    \item \textbf{Métricas de Estratificação:} A capacidade do nosso pipeline de quantificar o perfil vertical de fração de vazio $\alpha(y)$ e o desvio do centroide de vapor em relação ao eixo do canal permite parametrizar diretamente a fração de perímetro molhado $\theta_{\text{wet}} / 2\pi$, alimentando modelos fenomenológicos avançados (como o modelo de Wojtan--Ursenbacher--Thome);
+    \item \textbf{Modelo de Partição de Calor (RPI Model):} Na ebulição nucleada subarrefecida, o fluxo térmico total imposto na parede da conduta ($q''_{\text{wall}}$) pode ser decomposto segundo o modelo clássico do Rensselaer Polytechnic Institute (Kurul \& Podowski~\cite{seong2023automated}):
+    \begin{equation}
+        q''_{\text{wall}} = q''_{1\phi} + q''_{\text{evap}} + q''_{\text{quench}}
+    \end{equation}
+    em que a componente evaporativa é regida por:
+    \begin{equation}
+        q''_{\text{evap}} = \frac{\pi}{6} d_{\text{dep}}^3 \rho_v h_{fg} f_{\text{dep}} N_a
+    \end{equation}
+    O nosso algoritmo de rastreamento cinemático a 2000~FPS extrai diretamente a distribuição dos diâmetros de destacamento ($d_{\text{dep}}$), a frequência de desprendimento interfacial ($f_{\text{dep}}$) e a densidade de sítios de nucleação ativos ($N_a$), viabilizando o fecho experimental deste modelo mecanístico sem coeficientes empíricos ad-hoc.
+\end{itemize}
+
+\subsection{Calibração Experimental \emph{in-situ} do Depth from Defocus (DFD)}
+\label{subsec:calibracao_dfd_futura}
+
+A formulação de \emph{Depth from Defocus} monocular com regularização \emph{smoothstep} $C^1$ desenvolvida neste estágio estabeleceu a base matemática para resolver a ambiguidade fora do plano ($z$). Como próximo passo experimental acordado com o orientador:
+\begin{enumerate}
+    \item Gravação de sequências de vídeo na bancada com alvos micrométricos de referência (grelhas de pontos calibradas) posicionados no plano posterior da conduta de vidro;
+    \item Variação controlada da abertura ótica do diafragma da lente ($f$-stop, e.g., $f/2{,}8 \to f/4 \to f/5{,}6$) para calibrar empiricamente a taxa linear de desfocagem $\beta_{\text{eff}} = \sigma / z$ e caracterizar a profundidade de campo útil;
+    \item Acoplamento definitivo da coordenada $z_i$ de cada bolha esferoidal à reconstrução da malha tridimensional e aos mapas de densidade de área interfacial ($a_i = 6\alpha / d_{32}$).
+\end{enumerate}
+
+\subsection{Integração com Dinâmica de Fluidos Computacional (CFD)}
+\label{subsec:integracao_cfd}
+
+Os modelos de simulação numérica multifásica em CFD (nomeadamente abordagens Eulerian--Eulerian de dois fluidos e métodos \emph{Volume of Fluid} -- VOF) dependem criticamente de leis de fecho para as forças interfaciais de arrasto (\emph{drag}, $C_D$), sustentação (\emph{lift}, $C_L$) e massa virtual. O conjunto de dados tridimensionais gerado pelo pipeline em Python --- contendo posições $(x, y, z)$, volumes $V_i$, velocidades vetoriais $\vec{v}_i$ e frequências de fragmentação turbulentas --- constitui uma base empírica de elevado valor para a validação e calibração de códigos de simulação numérica desenvolvidos na Universidade de Coimbra.
+
+\subsection{Aprendizagem Auto-supervisionada e Escala de Cinzentos}
+\label{subsec:aprendizagem_auto}
+
+Recomenda-se a transição futura para modelos de segmentação treinados diretamente sobre imagens contínuas em tons de cinzento ($0\text{--}255$), explorando arquiteturas modernas de codificação visual auto-supervisionada (tais como \emph{Masked Autoencoders} ou modelos da família DINOv2). Esta abordagem permitirá explorar volumes massivos de fotogramas de alta velocidade sem necessidade de anotação poligonal humana prévia, preservando gradientes de intensidade subtis que auxiliam a identificação de micro-interfaces e vórtices de esteira.
+
+\subsection{Disseminação e Produção Científica Decorrente do Estágio}
+\label{subsec:producao_cientifica}
+
+Como resultado direto dos desenvolvimentos teóricos, algorítmicos e experimentais alcançados durante este período de estágio, elaborou-se um manuscrito científico integralmente estruturado e redigido segundo os padrões da editora Elsevier:
+\begin{itemize}
+    \item \textbf{Artigo em Revista Internacional:} Ribeiro, G., Branco, R.~C., \emph{<<Automated High-Speed Image Analysis, 3D Reconstruction, and Kinematics of Two-Phase Flow Boiling in Circular Conduits Using Deep Learning and Single-Camera Depth from Defocus>>}, submetido ao \emph{International Journal of Multiphase Flow} (Elsevier), 2026~\cite{ribeiro2026automated}.
+\end{itemize}
+Este trabalho consolida as principais inovações do estágio --- nomeadamente a rede ResNet-34 U-Net com perda híbrida BCE + Dice, a reconstrução 3D delimitada por corda cilíndrica em unidades SI, o rastreamento por Kuhn--Munkres com quarentena de \emph{breakup} e a formulação analítica de \emph{Depth from Defocus} monocular com regularização \emph{smoothstep} $C^1$ --- projetando os avanços científicos alcançados no projeto Bio-Waste$_2$Carbon na comunidade científica internacional.

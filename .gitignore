@@ -1,0 +1,35 @@
+# LaTeX auxiliary and build files
+*.aux
+*.bbl
+*.blg
+*.fdb_latexmk
+*.fls
+*.log
+*.out
+*.synctex.gz
+*.synctex(busy)
+*.spl
+*.toc
+*.nav
+*.snm
+*.vrb
+*.lof
+*.lot
+*.run.xml
+*.bcf
+
+# macOS system files
+.DS_Store
+
+# Cloud sync conflict duplicates (Google Drive / OneDrive)
+* 2.*
+* 3.*
+* 4.*
+* (conflicted copy*
+
+# Temporary scratch crops
+/assets/test_*
+/assets/scratch_*
+/assets/page_*.png
+/cover_page_*.png
+/report_page_*.png

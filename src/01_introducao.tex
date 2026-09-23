@@ -1,0 +1,53 @@
+% !TEX root = ../main.tex
+\section{Introdução}
+\label{sec:introducao}
+
+O presente relatório foi elaborado no âmbito da bolsa de iniciação à investigação integrada no projeto \textbf{Bio-Waste2Carbon} (BW2C), associado ao concurso de talentos \textbf{Capture the Future II} e realizado ao longo de três meses, entre julho e setembro de 2026. Este documento tem como objetivo apresentar e refletir detalhadamente sobre a totalidade das atividades desenvolvidas durante o período de estágio, estabelecendo a sua relevância científica, tecnológica e industrial no contexto da engenharia térmica e da sustentabilidade ambiental.
+
+O projeto BW2C, liderado pela empresa \textbf{SustainC}, em parceria estratégica com a \textbf{Fravizel}, a \textbf{ADAI} (Associação para o Desenvolvimento da Aerodinâmica Industrial) e o Departamento de Engenharia Mecânica da \textbf{Universidade de Coimbra}, contando com o cofinanciamento da União Europeia através dos programas COMPETE 2030 e PORTUGAL 2030, constitui uma iniciativa de ponta no domínio da captura e armazenamento criogénico de carbono e valorização energética de resíduos de biomassa florestal. A sua proposta assenta na conceção e implementação de soluções de engenharia inovadoras vocacionadas para a descarbonização industrial e mitigação das alterações climáticas, explorando unidades móveis de captura criogénica dotadas de autonomia energética. Este esforço multidisciplinar articula a investigação científica fundamental com a aplicação prática direta em desafios contemporâneos prementes, nomeadamente a redução sistemática de emissões de gases com efeito de estufa (GEE), a gestão sustentável e valorização económica dos recursos florestais e a prevenção ativa de incêndios em Portugal.
+
+Neste enquadramento global, o programa de bolsas de investigação foi desenhado para integrar estudantes universitários em equipas científicas avançadas, proporcionando uma experiência formativa intensiva e aplicada em áreas de vanguarda da engenharia mecânica, automação, visão computacional e inteligência artificial. O percurso formativo foi organizado de forma sequencial em duas etapas complementares:
+\begin{enumerate}
+    \item \textbf{Primeira Fase -- Contexto Laboratorial e Modelação CAD (Julho de 2026):} Decorreu em regime presencial nos laboratórios de energias da ADAI e do Departamento de Engenharia Mecânica da Universidade de Coimbra. Centrou-se na modelação tridimensional assistida por computador em CAD (SolidWorks\textregistered) dos componentes da bancada experimental dedicada ao estudo de fenómenos de escoamento em ebulição (\emph{flow boiling}) de fluidos orgânicos, na integração mecânica de novos subsistemas no circuito fechado (nomeadamente o tanque recetor de líquido e a estrutura de elevação da válvula reguladora de pressão), e no acompanhamento da instrumentação e preparação da secção de testes óticos para visualização a alta velocidade.
+    \item \textbf{Segunda Fase -- Contexto Remoto e Computacional (Agosto e Setembro de 2026):} Incidiu sobre o desafio tecnológico proposto pelo orientador, o Eng.~Rodrigo Branco, formalmente intitulado: \emph{<<Desenvolvimento e otimização de um algoritmo de inteligência artificial para reconhecimento e categorização de bolhas num escoamento ebulitivo>>}. Esta fase envolveu a conceção e implementação de um pipeline integral em Python e PyTorch de visão computacional, segmentação semântica profunda via redes neuronais convolucionais (U-Net com codificador residual ResNet-34 e perda híbrida BCE + Dice), reconstrução volumétrica tridimensional com confinamento geométrico cordal da secção circular do tubo, cinemática de alta velocidade a 2000 fotogramas por segundo com algoritmo Húngaro (Kuhn--Munkres) e desacoplamento de fragmentação (\emph{breakup}), e a formulação analítica pioneira de \emph{Depth from Defocus} (DFD) monocular com regularização assintótica junto à parede frontal.
+\end{enumerate}
+
+A pertinência técnica e científica deste trabalho decorre da necessidade de estabelecer metodologias de medição não intrusivas, escaláveis e de elevada fidelidade física para a caracterização hidrodinâmica e morfológica de escoamentos com mudança de fase. Em sistemas térmicos industriais de ponta, tais como os Ciclos Orgânicos de Rankine (ORC) integrados na maquinaria móvel de captura de carbono para conversão de calor residual em eletricidade, a taxa de transferência de calor, a perda de carga por atrito e as margens de segurança térmica (prevenção de \emph{dryout} e crise de ebulição) são fortemente governadas por parâmetros interfaciais fundamentais: a fração de vazio (\emph{void fraction}, $\alpha$), a velocidade de deslizamento entre fases, o diâmetro médio de bolha e a frequência de destacamento nucleado. A substituição de processos tradicionais de medição manual ou intrusiva por ferramentas automatizadas de inteligência artificial abre caminho à validação empírica rigorosa de correlações macroscópicas e de modelos de fecho para dinâmica de fluidos computacional (CFD).
+
+A estrutura deste relatório encontra-se organizada da seguinte forma:
+\begin{itemize}
+    \item Na \autoref{sec:laboratorio}, detalha-se o enquadramento da bancada experimental e o trabalho de modelação e integração mecânica tridimensional em CAD (SolidWorks\textregistered) desenvolvido pelo autor para a sua melhoria e operacionalização;
+    \item Na \autoref{sec:computacional_ia}, apresenta-se o desenvolvimento integral do ambiente de processamento de imagem, inteligência artificial e cinemática 3D em Python, incluindo pré-processamento ótico, treino da rede neuronal U-Net ResNet-34, reconstrução 3D de duplo regime, rastreio cinemático por Kuhn--Munkres e determinação de profundidade monocular por DFD;
+    \item Na \autoref{sec:validacao}, expõe-se a validação dos resultados obtidos face a teorias de deriva (\emph{drift-flux}) de Rouhani--Axelsson, métricas de segmentação e séries temporais de imagens a alta velocidade;
+    \item Na \autoref{sec:investigacao_futura}, exploram-se as perspetivas e linhas de continuidade de investigação, articulando os dados visuais com modelos térmicos avançados de escoamento e partição de calor;
+    \item Por fim, na \autoref{sec:consideracoes_pessoais}, formulam-se as considerações finais e os devidos agradecimentos a todas as entidades e pessoas que tornaram possível a concretização deste estágio.
+\end{itemize}
+
+\subsection{Cronograma e Plano de Atividades Previsto vs. Executado}
+\label{subsec:cronograma_trabalho}
+
+Em estreita consonância com o plano programático definido no desafio \emph{Capture the Future II} para a vertente de escoamentos ebulitivos, as atividades distribuíram-se ao longo do trimestre de acordo com a programação sintetizada na \autoref{tab:cronograma_estagio}. O cumprimento integral destas metas permitiu não só honrar os objetivos estipulados inicialmente pela coordenação do projeto, como estender o estado da arte através de inovações metodológicas originais (segmentação por perda híbrida, reconstrução de duplo regime delimitada e modelo analítico DFD).
+
+\begin{table}[!htbp]
+\centering
+\small
+\caption{Cronograma e plano de atividades planeadas vs. executadas no estágio (2026).}
+\label{tab:cronograma_estagio}
+\begin{tabularx}{\textwidth}{l>{\raggedright\arraybackslash}p{4.2cm}>{\raggedright\arraybackslash}X}
+\toprule
+\textbf{Período} & \textbf{Objetivos Planeados (CtF II)} & \textbf{Trabalho Efetivamente Executado} \\
+\midrule
+\textbf{Julho de 2026} \newline (Presencial) &
+Auxílio na construção e comissionamento da bancada experimental; instrumentação e sensorização; monitorização da câmara de alta velocidade; melhoria contínua do projeto 3D em SolidWorks\textregistered. &
+Modelação e refinamento tridimensional em CAD (SolidWorks\textregistered) da bancada experimental; integração mecânica de novos subsistemas no circuito hidráulico fechado (tanque recetor de líquido / \emph{liquid receiver} e tubagens de interligação); reconfiguração do suporte da válvula reguladora de pressão com elevação de perfis estruturais de alumínio; verificação dimensional de alinhamentos e preparação da secção de ensaios óticos para videografia de alta velocidade. \\
+\midrule
+\textbf{Agosto de 2026} \newline (Remoto) &
+Desenvolver e otimizar algoritmo de \emph{machine learning} (CNN U-Net) para identificação e categorização de bolhas (volume e velocidade a partir de imagens 2D); desenvolvimento de métricas de escoamento. &
+Migração integral de MATLAB para ecossistema Python modular (\texttt{main.py}); pré-processamento ótico de imagens com subtração de fundo monofásica e calibração espacial métrica; implementação e treino de ResNet-34 U-Net com função de perda híbrida balanceada (BCE + Dice); desenvolvimento do modelo de reconstrução 3D de duplo regime (elipsoidal com confinamento cordal rigoroso e extrusão suavizada por EDT para grandes \emph{slugs}); rastreamento cinemático a 2000~FPS com algoritmo de Kuhn--Munkres e desacoplamento de eventos de fragmentação (\emph{breakup}). \\
+\midrule
+\textbf{Setembro de 2026} \newline (Validação) &
+Validação do algoritmo a partir de dados experimentais e elaboração do relatório final de estágio. &
+Formulação e regularização assintótica $C^1$ de \emph{Depth from Defocus} (DFD) monocular; validação teórica da fração de vazio face ao modelo de deriva de Rouhani--Axelsson e validação experimental com imagem de referência de minicanal com R-245fa (erro relativo de 3,867\%); redação integral do artigo científico submetido ao \emph{International Journal of Multiphase Flow}~\cite{ribeiro2026automated} e compilação do presente relatório final de estágio. \\
+\bottomrule
+\end{tabularx}
+\end{table}
