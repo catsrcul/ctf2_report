@@ -39,7 +39,7 @@ A reduzida variância global ($\sigma_\alpha \approx 0{,}07$) comprova que o esc
 
 Para avaliar quantitativamente o impacto das correções implementadas em 2026, executou-se uma comparação cruzada na mesma sequência de imagens entre:
 \begin{enumerate}
-    \item O algoritmo do ano anterior em MATLAB (método voxelizado com discretização de grelha);
+    \item O algoritmo exploratório preliminar em MATLAB (método voxelizado com discretização de grelha);
     \item O novo pipeline desenvolvido em Python (modelo de duplo regime com integração contínua e confinamento cordal rigoroso $c \le \sqrt{R_{\text{pipe}}^2 - \Delta y^2}$).
 \end{enumerate}
 
@@ -56,18 +56,18 @@ A análise da \autoref{fig:void_fraction_comparison} revela conclusões físicas
 \begin{itemize}
     \item O método preliminar em MATLAB tendia a sobrestimar a fração de vazio em fotogramas com elevada presença de bolhas médias ($\alpha \approx 0{,}41$ vs. $\alpha \approx 0{,}36$), consequência direta do antigo erro dimensional no cálculo do semi-eixo de profundidade;
     \item Nos fotogramas onde um grande \emph{slug} começava a sair do campo de visão (fotogramas 24 a 26), o método em MATLAB apresentava oscilações devidas ao truncamento nas grelhas de discretização píxel a píxel, ao passo que a integração analítica em unidades padrão SI ($\mathrm{m}^3$) do novo modelo em Python assegura uma transição suave e fisicamente coerente com a conservação da massa;
-    \item Em termos de custo computacional, o processamento completo em Python executou em frações de segundo por fotograma, permitindo taxas de processamento em lote consideravelmente superiores às alcançadas no ano precedente.
+    \item Em termos de custo computacional, o processamento completo em Python executou em frações de segundo por fotograma, permitindo taxas de processamento em lote consideravelmente superiores às alcançadas na abordagem preliminar em MATLAB.
 \end{itemize}
 
 \subsection{Validação Experimental em Conduta com Refrigerante Orgânico}
 \label{subsec:validacao_charnay}
 
-Por forma a manter a comparabilidade com os testes de referência executados no relatório de 2025~\cite{reis2025relatorio}, processou-se a imagem experimental documentada por Romain Charnay (2014)~\cite{charnay2014experimental}, obtida num minicanal circular horizontal com diâmetro interno $D_i = 2{,}96\,\mathrm{mm}$ utilizando o fluido de trabalho orgânico R-245fa (1,1,1,3,3-pentafluoropropano), fluido representativo de ciclos ORC de baixa e média entalpia. As condições operacionais do ensaio foram: temperatura de saturação $T_{\text{sat}} = 120\,^{\circ}\mathrm{C}$, fluxo térmico constante imposto na parede de $q'' = 50\,\mathrm{kW/m^2}$, velocidade mássica $G = 500\,\mathrm{kg/(m^2\cdot s)}$ e título de vapor estabilizado em $x = 0{,}32$. A imagem de escoamento binarizada é exibida na \autoref{fig:validacao_charnay}.
+Como caso de validação e calibração experimental face a dados consolidados da literatura de escoamentos ebulitivos em minicanais, processou-se a imagem experimental documentada por Romain Charnay (2014)~\cite{charnay2014experimental}, obtida num minicanal circular horizontal com diâmetro interno $D_i = 2{,}96\,\mathrm{mm}$ utilizando o fluido de trabalho orgânico R-245fa (1,1,1,3,3-pentafluoropropano), fluido representativo de ciclos ORC de baixa e média entalpia. As condições operacionais do ensaio foram: temperatura de saturação $T_{\text{sat}} = 120\,^{\circ}\mathrm{C}$, fluxo térmico constante imposto na parede de $q'' = 50\,\mathrm{kW/m^2}$, velocidade mássica $G = 500\,\mathrm{kg/(m^2\cdot s)}$ e título de vapor estabilizado em $x = 0{,}32$. A imagem de escoamento binarizada é exibida na \autoref{fig:validacao_charnay}.
 
 \begin{figure}[!htbp]
     \centering
     \includegraphics[width=0.88\textwidth]{assets/fig_validacao_charnay.png}
-    \caption{Imagem de escoamento ebulitivo do refrigerante R-245fa em minicanal circular utilizada para validação experimental~\cite{charnay2014experimental, reis2025relatorio}.}
+    \caption{Imagem de escoamento ebulitivo do refrigerante R-245fa em minicanal circular utilizada para validação experimental~\cite{charnay2014experimental}.}
     \label{fig:validacao_charnay}
 \end{figure}
 

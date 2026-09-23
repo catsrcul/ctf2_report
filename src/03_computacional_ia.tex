@@ -38,7 +38,7 @@ sendo $V_g$ o volume total tridimensional de gás e $V_{\text{tubo}} = \pi R_{\t
 \subsection{Estado da Arte e Inovação da Nova Arquitetura em Python}
 \label{subsec:estado_da_arte_ia}
 
-Nos últimos anos, a aplicação de redes neuronais convolucionais baseadas na arquitetura U-Net~\cite{ronneberger2015unet} revolucionou a análise de bolhas em escoamentos térmicos. Seong et al.~\cite{seong2023automated} (MIT) aplicaram uma U-Net clássica com \emph{transfer learning} a bolhas em ebulição subarrefecida em placas planas a 10\,000~FPS, combinando-a com fluxo ótico global de Horn--Schunck~\cite{hornschunck1981}. Passoni et al.~\cite{passoni2024integrating} utilizaram redes convolucionais para estimar a fração de vazio em canais corrugados. No ano anterior deste projeto, um trabalho preliminar conduzido em MATLAB utilizou uma U-Net otimizada por \emph{Particle Swarm Optimization} (PSO)~\cite{kennedy1995particle, reis2025relatorio}. Contudo, essa implementação inicial apresentava limitações metodológicas e operacionais relevantes:
+Nos últimos anos, a aplicação de redes neuronais convolucionais baseadas na arquitetura U-Net~\cite{ronneberger2015unet} revolucionou a análise de bolhas em escoamentos térmicos. Seong et al.~\cite{seong2023automated} (MIT) aplicaram uma U-Net clássica com \emph{transfer learning} a bolhas em ebulição subarrefecida em placas planas a 10\,000~FPS, combinando-a com fluxo ótico global de Horn--Schunck~\cite{hornschunck1981}. Passoni et al.~\cite{passoni2024integrating} utilizaram redes convolucionais para estimar a fração de vazio em canais corrugados. Numa abordagem preliminar desenvolvida anteriormente no projeto em MATLAB, utilizou-se uma U-Net otimizada por \emph{Particle Swarm Optimization} (PSO)~\cite{kennedy1995particle}. Contudo, essa implementação inicial apresentava limitações metodológicas e operacionais relevantes:
 \begin{itemize}
     \item Dependência do ambiente proprietário MATLAB, com reduzida escalabilidade para processamento em lote e integração de modelos estado-da-arte de visão computacional;
     \item Ausência de conexões residuais no codificador, provocando lentidão na convergência e suscetibilidade à degradação de gradientes durante o \emph{backpropagation};
@@ -48,16 +48,16 @@ Nos últimos anos, a aplicação de redes neuronais convolucionais baseadas na a
     \item Inexistência de estimativa da coordenada de profundidade fora do plano ($z$).
 \end{itemize}
 
-Para superar definitivamente estas restrições, desenvolveu-se em 2026 um ecossistema modular inteiramente em Python, com orquestração centralizada via CLI em \texttt{main.py}. Na \autoref{tab:comparacao_tecnica} sumariza-se o salto qualitativo da nossa abordagem face à literatura e ao trabalho do ano anterior.
+Para superar definitivamente estas restrições, desenvolveu-se em 2026 um ecossistema modular inteiramente em Python, com orquestração centralizada via CLI em \texttt{main.py}. Na \autoref{tab:comparacao_tecnica} sumariza-se o salto qualitativo da nossa abordagem face à literatura e aos scripts exploratórios preliminares em MATLAB desenvolvidos anteriormente no projeto.
 
 \begin{table}[!htbp]
 \centering
 \small
-\caption{Comparação técnica entre abordagens da literatura, trabalho anterior e a implementação em 2026.}
+\caption{Comparação técnica entre abordagens da literatura, baseline preliminar em MATLAB e a nova implementação em Python (2026).}
 \label{tab:comparacao_tecnica}
 \begin{tabularx}{\textwidth}{>{\raggedright\arraybackslash}p{3.2cm}>{\raggedright\arraybackslash}X>{\raggedright\arraybackslash}X>{\raggedright\arraybackslash}X}
 \toprule
-\textbf{Característica} & \textbf{Seong et al. (MIT, 2023)} & \textbf{Baseline 2025 (MATLAB)} & \textbf{Nossa Implementação 2026 (Python)} \\
+\textbf{Característica} & \textbf{Seong et al. (MIT, 2023)} & \textbf{Baseline Preliminar (MATLAB)} & \textbf{Nossa Implementação 2026 (Python)} \\
 \midrule
 Ambiente \& Framework & Python / TensorFlow & MATLAB Deep Learning & Python 3.12 / PyTorch / OpenCV \\
 Codificador (Backbone) & U-Net Clássica (2015) & U-Net Clássica com PSO & \textbf{ResNet-34 Residual (Pré-treinada ImageNet)} \\
@@ -186,7 +186,7 @@ resultando no volume elipsoidal:
 \begin{equation}
     V_{\text{small}, i} = \frac{4}{3} \pi a b c
 \end{equation}
-Esta formulação corrige o erro do código prévio de 2025 (no qual constava $c = 2\sqrt{R^2-\Delta y^2}$), prevenindo qualquer violação física da parede sólida do tubo. A \autoref{fig:reconstrucao_frame16} ilustra a correspondência entre a imagem 2D e os elipsoides 3D reconstituídos.
+Esta formulação corrige o erro dimensional verificado nos scripts exploratórios preliminares em MATLAB (nos quais constava $c = 2\sqrt{R^2-\Delta y^2}$), prevenindo qualquer violação física da parede sólida do tubo. A \autoref{fig:reconstrucao_frame16} ilustra a correspondência entre a imagem 2D e os elipsoides 3D reconstituídos.
 
 \begin{figure}[!htbp]
     \centering
